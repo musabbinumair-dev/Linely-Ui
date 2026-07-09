@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Linely — Queue Management"
+version = "1.0.0"
+id = "artifacts/linely"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20004
+
+[services.development]
+run = "pnpm --filter @workspace/linely run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/linely", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/linely/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20004"
+BASE_PATH = "/"

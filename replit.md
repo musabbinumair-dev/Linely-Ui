@@ -1,36 +1,47 @@
-# [Project name]
+# Linely — Queue Management SaaS
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A high-fidelity Queue Management Software-as-a-Service (SaaS) with a landing page, operator console, admin dashboard, and superadmin panels.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/linely run dev` — run the frontend (port auto-assigned via workflow)
+- `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Frontend: React 19, Vite 7, Tailwind CSS v4
+- Animation: motion/react (v12)
+- Charts: Recharts
+- Icons: Lucide React
+- Backend: Express 5 (API server, minimal — app is mostly frontend-driven)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
-
-## Architecture decisions
-
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- `artifacts/linely/src/App.tsx` — root app with state-driven view routing
+- `artifacts/linely/src/components/` — 30 components (AdminDashboard, OperatorConsole, SuperadminDashboard, etc.)
+- `artifacts/linely/src/types.ts` — shared TypeScript types
+- `artifacts/linely/src/index.css` — Tailwind v4 theme with brand colors (navy, cyan, cream)
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+**Views (state-driven SPA):**
+- **Landing** — marketing page with hero, features, pricing, industries
+- **Auth** — login/role selector portal
+- **Operator Console** — frontline counter management with real-time queue, Web Audio chimes, camera scanner
+- **Admin Dashboard** — queue stress simulator, branding toolkit, audit logs
+- **Superadmin Dashboard** — platform-level tenant management, billing, system health
+- **Company Superadmin** — company-level admin control panel
+- **Waiting Room TV** — display screen for customers
+- **Product / Contact pages** — additional marketing surfaces
+
+## Architecture decisions
+
+- Pure frontend SPA — all state is in-memory React state (no database needed for demo)
+- Web Audio API for chimes (no sound file assets required)
+- `motion/react` package (not `framer-motion`) for animations
 
 ## User preferences
 
@@ -38,7 +49,9 @@ _Populate as you build — explicit user instructions worth remembering across s
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Components use `motion/react` imports (framer-motion v12 new package name)
+- AdminDashboard.tsx exceeds 500KB (Babel deoptimises styling — normal warning)
+- Some Lucide icon props use `aria-label` instead of `title` (TS constraint)
 
 ## Pointers
 

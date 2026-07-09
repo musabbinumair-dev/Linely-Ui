@@ -1,0 +1,2 @@
+- [Linely font system](linely-fonts.md) — Boldonse must be explicitly imported via Google Fonts URL; it's used on all h1/h2/h3 globally and via font-boldonse Tailwind class.
+- [Linely dashboard architecture](linely-dashboard-arch.md) — CompanySuperadmin uses tab-conditional rendering; new pages receive triggerToast prop and manage their own scroll/padding.
