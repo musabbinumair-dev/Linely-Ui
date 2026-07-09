@@ -45,6 +45,8 @@ import { StatusPill, PlanBadge } from "./GlobalUI";
 import AdminSidebar from "./AdminSidebar";
 import PendingApprovalsPage from "./PendingApprovalsPage";
 import MRRInvoicesPage from "./MRRInvoicesPage";
+import SecurityAlertsPage from "./SecurityAlertsPage";
+import GlobalSettingsPage from "./GlobalSettingsPage";
 
 // Type definitions
 interface Branch {
@@ -607,6 +609,10 @@ export default function CompanySuperadminDashboard({ onLogout }: CompanySuperadm
           <PendingApprovalsPage triggerToast={triggerToast} />
         ) : activeTab === "billing" ? (
           <MRRInvoicesPage triggerToast={triggerToast} />
+        ) : activeTab === "alerts" ? (
+          <SecurityAlertsPage triggerToast={triggerToast} />
+        ) : activeTab === "settings" ? (
+          <GlobalSettingsPage triggerToast={triggerToast} />
         ) : (
         <div className="flex-1 h-full overflow-y-auto p-6 space-y-6">
 
